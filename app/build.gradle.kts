@@ -50,6 +50,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.coroutines)
 
+    // MPAndroidChart
+    implementation(libs.mpandroidchart)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)

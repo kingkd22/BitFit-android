@@ -27,7 +27,7 @@
             android:id="@+id/cardAvgCalories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
             android:id="@+id/cardMinCalories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
             android:id="@+id/cardMaxCalories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,7 @@
             android:id="@+id/cardTotalItems"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -173,6 +173,44 @@
                     android:textSize="28sp"
                     android:textStyle="bold"
                     tools:text="0" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Calorie Trend Graph Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTotalItems">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calorie Logged Trend"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="12dp" />
 
             </LinearLayout>
 

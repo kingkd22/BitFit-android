@@ -1,5 +1,6 @@
 package com.example.bitfit
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.bitfit.databinding.FragmentDashboardBinding
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -49,8 +54,48 @@ class DashboardFragment : Fragment() {
                         binding.tvMaxCaloriesValue.text = max.toString()
                         binding.tvTotalItemsValue.text = foods.size.toString()
                     }
+                    updateChart(foods)
                 }
             }
+        }
+    }
+
+    private fun updateChart(foods: List<FoodEntity>) {
+        if (foods.isEmpty()) {
+            binding.lineChart.clear()
+            binding.lineChart.setNoDataText("No food items logged yet")
+            binding.lineChart.invalidate()
+            return
+        }
+
+        val chronologicallySorted = foods.reversed()
+        val entries = chronologicallySorted.mapIndexed { index, food ->
+            Entry((index + 1).toFloat(), food.calorieCount.toFloat())
+        }
+
+        val dataSet = LineDataSet(entries, "Calories").apply {
+            color = Color.parseColor("#6200EE")
+            setCircleColor(Color.parseColor("#3700B3"))
+            lineWidth = 2.5f
+            circleRadius = 5f
+            setDrawCircleHole(true)
+            valueTextSize = 10f
+            setDrawFilled(true)
+            fillColor = Color.parseColor("#BB86FC")
+            fillAlpha = 60
+            mode = LineDataSet.Mode.CUBIC_BEZIER
+        }
+
+        binding.lineChart.apply {
+            data = LineData(dataSet)
+            description.isEnabled = false
+            legend.isEnabled = false
+            xAxis.position = XAxis.XAxisPosition.BOTTOM
+            xAxis.setDrawGridLines(false)
+            xAxis.granularity = 1f
+            axisRight.isEnabled = false
+            animateX(500)
+            invalidate()
         }
     }
 
